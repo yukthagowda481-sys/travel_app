@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Route Distance</title>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+        }
+
+        .box {
+            background: white;
+            color: black;
+            width: 400px;
+            margin: 100px auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        select, button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #764ba2;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+            font-weight: bold;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <h2>🌍 Distance Calculator</h2>
+
+        <form method="POST">
+            
+            <select name="city1" required>
+                <option value="">Select First City</option>
+                {% for city in cities %}
+                    <option value="{{ city }}">{{ city }}</option>
+                {% endfor %}
+            </select>
+
+            <select name="city2" required>
+                <option value="">Select Second City</option>
+                {% for city in cities %}
+                    <option value="{{ city }}">{{ city }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Calculate Distance</button>
+        </form>
+
+        <!-- Error Message -->
+        {% if error %}
+            <div class="error">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <!-- Result -->
+        {% if distance %}
+            <div class="result">
+                📍 Distance between {{ city1 }} and {{ city2 }} <br><br>
+                🚗 Distance: {{ distance }} KM <br>
+                ⏱️ Time: {{ duration }} minutes
+            </div>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>

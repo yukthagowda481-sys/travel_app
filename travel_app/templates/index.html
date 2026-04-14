@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Last Port</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            height: 100vh;
+            color: white;
+            background: linear-gradient(120deg, 
+                #00c6ff,   /* summer */
+                #f7971e,   /* autumn */
+                #56ccf2,   /* winter */
+                #38ef7d,   /* spring */
+                #3a7bd5    /* rainy */
+            );
+            background-size: 400% 400%;
+            animation: seasonMove 12s ease infinite;
+        }
+
+        @keyframes seasonMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            background: linear-gradient(to right, gold, orange, white);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .main {
+            height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 60px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 22px;
+            margin-bottom: 50px;
+            opacity: 0.9;
+        }
+
+        .features {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            width: 230px;
+            padding: 30px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.4s;
+            backdrop-filter: blur(10px);
+        }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.05);
+        }
+
+        /* Vasco Theme */
+        .sea {
+            background: linear-gradient(135deg, #2193b0, #6dd5ed);
+        }
+
+        /* Money Theme */
+        .money {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+        }
+
+        /* Memory Theme */
+        .memory {
+            background: linear-gradient(135deg, #8360c3, #2ebf91);
+        }
+
+        /* Weather Theme */
+        .weather {
+            background: linear-gradient(135deg, #f7971e, #ffd200, #4facfe, #00f2fe);
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="logo">⚓ The Last Port</div>
+    </div>
+
+    <div class="main">
+        <h1>The Last Port</h1>
+        <p>Where Every Journey Finds Its Shore</p>
+
+        <div class="features">
+
+            <div class="card sea" onclick="location.href='/route'">
+                ⛵🌊<br><br>
+                Vasco da Gama
+            </div>
+
+            <div class="card money" onclick="location.href='/budget'">
+                💰💵<br><br>
+                Nirmala Sitharaman
+            </div>
+
+            <div class="card memory" onclick="location.href='/packing'">
+                🧠📦<br><br>
+                Fail to Remember
+            </div>
+
+            <div class="card weather" onclick="location.href='/weather'">
+                ❄️☀️🌧🌸🍂<br><br>
+                Weathercast
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather App</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+            color: #333;
+        }
+
+        .box {
+            background: white;
+            width: 350px;
+            margin: 100px auto;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+        }
+
+        input {
+            padding: 10px;
+            width: 70%;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            background: #667eea;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #5a67d8;
+        }
+
+        .weather {
+            margin-top: 20px;
+        }
+
+        .loading {
+            display: none;
+            font-size: 14px;
+            color: gray;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="box">
+    <h2>🌤 Weather Checker</h2>
+
+    <input type="text" id="city" placeholder="Enter city">
+    <button onclick="getWeather()">Check</button>
+
+    <p class="loading" id="loading">Fetching weather...</p>
+
+    <div class="weather" id="result"></div>
+</div>
+
+<script>
+function getWeather() {
+    let city = document.getElementById("city").value;
+
+    document.getElementById("loading").style.display = "block";
+    document.getElementById("result").innerHTML = "";
+
+    fetch("/get_weather?city=" + city)
+    .then(response => response.json())
+    .then(data => {
+
+        document.getElementById("loading").style.display = "none";
+
+        if (data.error) {
+            document.getElementById("result").innerHTML = "❌ City not found";
+            return;
+        }
+
+        let icon = data.icon;
+
+        document.getElementById("result").innerHTML = `
+            <h3>${data.city}</h3>
+            <img src="http://openweathermap.org/img/wn/${icon}@2x.png">
+            <p>🌡 Temp: ${data.temp} °C</p>
+            <p>☁ ${data.desc}</p>
+        `;
+
+        changeBackground(data.desc);
+    });
+}
+
+function changeBackground(desc) {
+    let body = document.body;
+
+    if (desc.includes("cloud")) {
+        body.style.background = "linear-gradient(135deg, #bdc3c7, #2c3e50)";
+    } else if (desc.includes("rain")) {
+        body.style.background = "linear-gradient(135deg, #4b79a1, #283e51)";
+    } else if (desc.includes("clear")) {
+        body.style.background = "linear-gradient(135deg, #fceabb, #f8b500)";
+    } else {
+        body.style.background = "linear-gradient(135deg, #74ebd5, #ACB6E5)";
+    }
+}
+</script>
+
+</body>
+</html>

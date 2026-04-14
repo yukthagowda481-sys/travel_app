@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Travel Budget Planner</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(to right, #a18cd1, #fbc2eb);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        input {
+            width: 90%;
+            padding: 8px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background: purple;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 95%;
+        }
+
+        button:hover {
+            background: #6a0dad;
+        }
+
+        .result {
+            margin-top: 15px;
+            font-weight: bold;
+            color: green;
+            font-size: 18px;
+        }
+
+        img {
+            margin-top: 15px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>🧳 Travel Budget Planner</h2>
+
+    <form method="POST">
+        <input type="number" name="hotel" placeholder="Hotel Cost" required>
+        <input type="number" name="food" placeholder="Food Cost" required>
+        <input type="number" name="transport" placeholder="Transport Cost" required>
+        <input type="number" name="shopping" placeholder="Shopping Cost" required>
+        <button type="submit">Calculate Total</button>
+    </form>
+
+    {% if result %}
+        <div class="result">
+            Total Trip Expense: ₹ {{ result }}
+        </div>
+
+        <img src="{{ url_for('static', filename='budget_chart.png') }}" width="300">
+    {% endif %}
+
+    <br><br>
+    <a href="/">⬅ Back</a>
+</div>
+
+</body>
+</html>
